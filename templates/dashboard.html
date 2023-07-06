@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Class Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url("https://wallpapercave.com/w/wp6278318.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+    }
+    
+    .navbar {
+      background: linear-gradient(to right, #141416, #000000);
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: flex-end;
+    
+    }
+    
+    .navbar h1 {
+      margin: 0;
+      font-size: 28px;
+      text-align: center;
+      flex: 1;
+      text-decoration: underline;
+    }
+    
+    .navbar ul {
+      list-style-type: square;
+      margin: 0;
+      padding: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: all 0.3s ease;
+      transform-origin: left;
+      transform: scaleX(0);
+      position: absolute;
+      top: 45px;
+      left: 0;
+      height: 85vh;
+      width: 12%;
+      background:  linear-gradient(to right, #141416, #000000);
+      padding: 10px;
+      z-index: 1;
+    }
+    
+    .navbar li {
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ffffff;
+      display: flex;
+      align-items: center;
+    }
+    
+    .navbar li a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .navbar .menu-icon {
+      display: flex;
+      align-items: center;
+      cursor: auto;
+      transition: transform 0.3s ease;
+    }
+    
+    .navbar .menu-icon span {
+      margin-left: 5px;
+    }
+    
+    .navbar:hover ul {
+      transform: scaleX(1);
+    }
+    
+    .profile {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .profile img {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+    
+    .profile p {
+      margin: 0;
+      font-size: 14px;
+      color: #ffffff;
+    }
+    
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+      flex-wrap: wrap;
+    }
+    
+    .box {
+      width: 300px;
+      height: 263px;
+      margin: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(to right, #46a9ff, #008cffa8);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #ffffff;
+      border-radius: 10px;
+    }
+    
+    .details {
+      background: linear-gradient(to right, #19191c, #000000);
+      color: white;
+      width: 1030px;
+      flex-direction: row;
+      text-align: left;
+      align-items: flex-start;
+      margin-right: 60px;
+      margin-left: 60px;
+    }
+    
+    .details-container {
+      display: flex;
+      justify-content: left;
+      align-items: left;
+      flex-direction: column;
+      margin-left: 0%;
+      margin-top: 0%;
+    }
+    
+    .details-container .box {
+      flex: 1;
+      flex-wrap: nowrap;
+      flex-direction: column;
+      color: white;
+    }
+    
+    .visualize {
+      background: linear-gradient(to right, #2a2a2c, #000000);
+      color: white;
+      align-items: center;
+      font-size: 5px;
+      font-weight: bold;
+      text-decoration: underline;
+      margin-top: 10px;
+      top: 0%;
+    }
+    
+    .register {
+      background: black;
+      color: white;
+      border: 2px solid black;
+    }
+    
+    .box h2 {
+      margin: 1px;
+      font-size: 24px;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      font-weight: bold;
+      text-decoration: underline;
+      color: white;
+    }
+    
+    .box p {
+      margin: 8px 0;
+      /* Add space between lines */
+      font-size: 20px;
+      margin-top: 0%;
+      font-weight: bold;
+      text-decoration: dashed;
+      list-style-type: 'X';
+      white-space: nowrap;
+      padding-left: 20px;
+      /* Adjust the space between bullet points and text */
+    }
+    
+    .attendance-btn {
+      margin-top: 5px;
+      margin-left: 300px;
+      /* background: linear-gradient(to right, #0d4fc1, #5a9fff83); */
+      color: #130f0f;
+      padding: 2px;
+      border-radius: 1px;
+      text-align: center;
+      font-size: 34px;
+      width: 1px;
+      font-weight: bold;
+      background-image: url('https://wallpapercave.com/w/wp9684491.jpg');
+      background-size: cover;
+      text-decoration: none;
+      flex-direction: column;
+      margin-bottom: 7%;
+    }
+    
+    .box img {
+      width: 230px;
+      height: 200px;
+
+    }
+    
+    .box a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      text-decoration: underline;
+      color: inherit;
+    }
+    
+    .quick-lines {
+  background: linear-gradient(to right, #ffa37be3, #f64d05d5);
+  padding: 2px;
+  text-align: left;
+  position: fixed; /* Change from sticky to fixed */
+  bottom: 0;
+  left: 0; /* Add left: 0; */
+  width: 100%;
+}
+
+
+    
+    .quick-lines ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 10px 0;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .quick-lines ul li {
+      margin-right: 10px;
+    }
+    
+    .quick-lines li {
+      margin-bottom: 5px;
+    }
+    
+    .quick-lines a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
+  </style>
+  <script>
+    function toggleMenu() {
+      var menu = document.getElementById("navbar-menu");
+      if (menu.style.display === "block") {
+        menu.style.display = "none";
+      } else {
+        menu.style.display = "block";
+      }
+    }
+    function markAttendance() {
+      window.location.href = "http://127.0.0.1:5500/templates/mark_attendance.html";
+    }
+  </script>
+</head>
+<body>
+  <div class="navbar">
+    <div class="menu-icon" onclick="toggleMenu()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+      <span>MENU</span>
+    </div>
+    <h1 class="navbar-heading">TEACHER'S DASHBOARD</h1>
+    <ul id="navbar-menu">
+      <li><a href="http://127.0.0.1:5500/templates/dash4.html"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+      <li><a href="image3.jpg"><i class="bi bi-calendar3"></i> Class Schedule</a></li>
+      <li><a href="#"><i class="bi bi-file-earmark-text"></i> Assignments</a></li>
+      <li><a href="#"><i class="bi bi-bar-chart"></i> Grades</a></li>
+      <li><a href="http://localhost:5000/display_data"><i class="bi bi-check-square"></i> Attendance Records</a></li>
+      <li><a href="#"><i class="bi bi-file-earmark-bar-graph"></i> Summary Reports</a></li>
+      <li><a href="http://localhost:8501/"><i class="bi bi-people"></i> Student Reports</a></li>
+      <li><a href="http://localhost:8501/"><i class="bi bi-file-earmark-plus"></i> Custom Reports</a></li>
+    </ul>
+    <div class="profile">
+      <img src="image.jpg" alt="Profile Picture">
+      <p>Aniket aggarwal</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="box details">
+      <div class="details-container">
+        <h2>Class Details</h2>
+        <p>Degree: Bsc Data Analytics</p>
+        <p>Year: 2nd</p> 
+        <p>Section: B</p>
+        <p>Class Name: Web Development</p>
+        <p>Time:11:30 AM- 12:30 AM</p>
+        <p>Location: Room 212</p>
+      </div>
+      <a href="#" class="attendance-btn" onclick="markAttendance()">Mark Attendance</a>
+    </div>
+    <div class="box visualize">
+      <a href="http://localhost:8501/"><h2>Visualize Details</h2></a>
+      <a href="http://localhost:8501/"><img src="https://wallpapercave.com/w/wp12337477.jpg" alt="Visualize"></a>
+    </div>
+    <div class="box visualize">
+      <a onclick="location.href='http://localhost:5000/display_data'"><h2>View Details</h2></a>
+      <a onclick="location.href='http://localhost:5000/display_data'"><img src="https://wallpapercave.com/w/wp9684443.jpg" alt="View Details"></a>
+    </div>
+    <div class="box visualize">
+      <a href="newuser.html"><h2>Register a New User</h2></a>
+      <a href="newuser.html"><img src="https://wallpapercave.com/w/wp5599683.jpg" alt="Register User"></a>
+    </div> 
+  </div>
+  
+  <div class="quick-lines">
+    <ul>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Terms of Service</a></li>
+      <li><a href="#">Contact Us</a></li>
+    </ul>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var quickLines = document.querySelector('.quick-lines');
+      var body = document.querySelector('body');
+
+      function toggleQuickLines() {
+        var scrollPosition = window.innerHeight + window.pageYOffset;
+        var bodyHeight = body.offsetHeight;
+
+        if (scrollPosition >= bodyHeight) {
+          quickLines.style.display = 'block';
+        } else {
+          quickLines.style.display = 'none';
+        }
+      }
+
+      window.addEventListener('scroll', toggleQuickLines);
+    });
+  </script>
+</body>
+</html>

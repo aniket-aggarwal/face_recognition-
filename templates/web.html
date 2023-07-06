@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance</title>
+    <style>
+        /* Add CSS styles to enhance the appearance */
+        body {
+            background-image: url("{{ url_for('static', filename='AA.jpg') }}");
+            background-size: contain;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 0px;
+        }
+        
+        h1 {
+            color: rgb(96, 62, 0);
+            font-size: 60px;
+            text-decoration: underline;
+            text-decoration-color: rgb(153, 97, 1);
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: right; /* Align the table content to the left */
+            margin-left: 0px; /* Move the table to the left */
+            margin-right: auto;
+            max-width: 1200px; /* Set a maximum width for the table */
+            margin-bottom: 4px;
+        }
+        
+        th, td {
+            padding: 12px 20px;
+            text-align: center;
+            width: 450px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #333;
+            color: white;
+        }
+        
+        .absent-text {
+            color: red;
+            display: none;
+        }
+        
+        .present-text {
+            color: darkgreen;
+            display: none;
+        }
+        
+        input[type="checkbox"] {
+            appearance: auto;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 16px;
+            align-items: right;
+            height: 16px;
+            border: 2px solid red;
+            background-color: red;
+            text-align: center;
+            border-radius: 3px;
+            display: inline-block;
+            position: relative;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+        
+        input[type="checkbox"]:checked {
+            background-color: darkgreen;
+            border-color: darkgreen;
+            text-align: center;
+        }
+        
+        input[type="checkbox"]:checked + .present-text {
+            display: inline;
+            margin-left: 5%;
+        }
+        
+        input[type="checkbox"]:not(:checked) + .absent-text {
+            display: inline;
+        }
+        
+        input[type="checkbox"]::after {
+            content: "✕";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 12px;
+        }
+        
+        input[type="checkbox"]:checked::after {
+            content: "✓";
+            position: absolute;
+            font-size: 12px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 13px;
+            height: 13px;
+            border: 1.5px solid white;
+            border-radius: 3px;
+        }
+        
+        input[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Attendance</h1>
+    <form action="/attendance/submit" method="POST">
+        <label>
+            <input type="checkbox" id="mark-all" onclick="markAll()">
+            Mark All Present
+        </label>
+        <table>
+            <thead>
+                <tr>
+                    <th>Serial No.</th>
+                    <th>Name</th>
+                    <th>Attendance</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in range(names|length) %}
+                <tr>
+                    <td>{{ i+1 }}</td>
+                    <td>{{ names[i] }}</td>
+                    <td>
+                        <label>
+                            <input type="checkbox" name="attendance[]" value="{{ names[i] }}">
+                            <span class="present-text">PRESENT</span>
+                            <span class="absent-text">ABSENT</span>
+                        </label>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <p>Total Present: <span id="total-present">0</span></p>
+        <p>Total Absent: <span id="total-absent">0</span></p>
+        <input type="submit" value="Submit Attendance">
+    </form>
+
+    <script>
+        function markAll() {
+            var checkboxes = document.getElementsByName("attendance[]");
+            var markAllCheckbox = document.getElementById("mark-all");
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = markAllCheckbox.checked;
+            }
+        }
+
+        function updateTotals() {
+            var checkboxes = document.getElementsByName("attendance[]");
+            var totalPresent = 0;
+            var totalAbsent = 0;
+
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    totalPresent++;
+                } else {
+                    totalAbsent++;
+                }
+            }
+
+            document.getElementById("total-present").textContent = totalPresent;
+            document.getElementById("total-absent").textContent = totalAbsent;
+        }
+
+        var checkboxes = document.getElementsByName("attendance[]");
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].addEventListener("change", updateTotals);
+        }
+    </script>
+</body>
+</html>
